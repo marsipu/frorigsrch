@@ -11,7 +11,7 @@ from PyQt5.QtWidgets import QAction, QDialog, QFileDialog, QHBoxLayout, QInputDi
 from mne_pipeline_hd.gui.base_widgets import EditList, SimpleDict, SimplePandasTable
 from mne_pipeline_hd.gui.gui_utils import Worker, center, set_ratio_geometry
 
-from frorigsrch.french_origin_searcher import get_word_origin
+from french_origin_searcher import get_word_origin
 
 
 class SearchPatternDlg(QDialog):
