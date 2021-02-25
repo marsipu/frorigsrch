@@ -11,7 +11,7 @@ from PyQt5.QtWidgets import QAction, QDialog, QFileDialog, QHBoxLayout, QInputDi
 from mne_pipeline_hd.gui.base_widgets import EditList, SimpleDict, SimplePandasTable
 from mne_pipeline_hd.gui.gui_utils import Worker, center, set_ratio_geometry
 
-from .french_origin_searcher import get_word_origin
+from frorigsrch.french_origin_searcher import get_word_origin
 
 
 class SearchPatternDlg(QDialog):
@@ -71,10 +71,12 @@ class MainWindow(QMainWindow):
 
         self.show_not_found = QAction('Show not-Found')
         self.show_not_found.setCheckable(True)
+        self.show_not_found.setChecked(True)
         settings_menu.addAction(self.show_not_found)
 
         self.save_not_found = QAction('Save not-Found')
         self.save_not_found.setCheckable(True)
+        self.show_not_found.setChecked(False)
         settings_menu.addAction(self.save_not_found)
 
     def init_ui(self):
@@ -113,6 +115,7 @@ class MainWindow(QMainWindow):
         file_path = QFileDialog.getOpenFileName(self, 'Select a english text-file', filter='Text-File (*.txt)')[0]
         if file_path:
             self.line_dict.clear()
+            self.all_words.clear()
             with open(file_path, 'r') as file:
                 lines = file.readlines()
                 for line in lines:
