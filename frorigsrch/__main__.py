@@ -6,7 +6,7 @@ from PyQt5.QtWidgets import QApplication
 from mne_pipeline_hd.gui.gui_utils import StdoutStderrStream
 from mne_pipeline_hd.pipeline_functions import ismac
 
-from gui import MainWindow
+from .gui import MainWindow
 
 
 def main():
