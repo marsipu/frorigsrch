@@ -42,7 +42,8 @@ class MainWindow(QMainWindow):
             'Etymons:.{,500}[Ff]{1}rench'
         ]
         self.all_words = list()
-        self.results_pd = pd.DataFrame([], columns=['Line Number', 'Translation', 'Origin'])
+        self.word_counts = dict()
+        self.results_pd = pd.DataFrame([], columns=['Line Number', 'Count', 'Translation', 'Origin'])
         self.pg_cnt = 0
         self.worker = None
 
@@ -132,6 +133,10 @@ class MainWindow(QMainWindow):
                             word = word_match.group().lower()
                             if word not in self.all_words:
                                 word_list.append(word)
+                            if word in self.word_counts:
+                                self.word_counts[word] += 1
+                            else:
+                                self.word_counts[word] = 1
                         self.all_words += word_list
                         self.line_dict[line_number] = word_list
 
@@ -175,6 +180,7 @@ class MainWindow(QMainWindow):
                     if result[0] is not None and (result[0] != 'Not found' or self.show_not_found.isChecked()):
                         translation, origin_type = result
                         self.results_pd.loc[word, 'Line Number'] = int(line_number)
+                        self.results_pd.loc[word, 'Count'] = self.word_counts[word]
                         self.results_pd.loc[word, 'Translation'] = translation
                         self.results_pd.loc[word, 'Origin'] = origin_type
                     self.line_dict[line_number].remove(word)
