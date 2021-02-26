@@ -5,7 +5,7 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QApplication
 from mne_pipeline_hd.pipeline_functions import ismac
 
-from gui import MainWindow
+from frorigsrch.gui import MainWindow
 
 
 def main():
